@@ -14,7 +14,7 @@
 
 - "Dead" Cell:
 
-    1. A cell with 3 neighbors BECOMES POPULATED
+    1. A cell with 3 neighbors BECOMES LIVE
 
 ## Educational Links
 1. John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.com/watch?v=R9Plq-D1gEk)

@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-"The Game of Life, also known simply as Life, is a `cellular automation` devised by the British matnematicial John Horton Conway in 1970. It is a `zero-player game`, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is `Turing complete` and can simulata a universal constructor or any other Turing machine."  
+"The Game of Life, also known simply as Life, is a `cellular automation` devised by the British mathematician John Horton Conway in 1970. It is a `zero-player game`, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is `Turing complete` and can simulata a universal constructor or any other Turing machine."  
         ~[Link](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
 --- 
@@ -39,8 +39,8 @@
 ## Steps
 1. Build EMPTY Grid 
 2. Set Initial State  
-    A - Random => Loop through all cells and randomly fill with `0` or `1`
-    B - Pre Defined => Developer created or community built initial structures  
+    A - Random => Loop through all cells and randomly fill with `0` or `1`  
+    B - Pre Defined => Developer created or community built initial configurations    
     C - User Created => starting with all `0's` a user can click to change a cell state before starting the game 
 
 --- 

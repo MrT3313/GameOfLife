@@ -20,6 +20,10 @@
 1. John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.com/watch?v=R9Plq-D1gEk)
 2. The Coding Train - Game of life coding challenge: [YouTube Video](https://www.youtube.com/watch?v=FWSR_7kZuYg)
 
+
+3. Lambda -- Rust Cellular Automata [YouTube Video](https://www.youtube.com/watch?v=U9ONS5XnqM8&feature=youtu.be)
+4. Lambda -- Intro to Web Assembly [YouTube Video](https://www.youtube.com/watch?v=ga8fYRLH7ys&feature=youtu.be)
+5. Lambda -- Conways Game of Life [YouTube Video](https://www.youtube.com/watch?v=ryK_HpS_cwY&feature=youtu.be)
 --- 
 
 ## Implementation

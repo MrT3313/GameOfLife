@@ -23,14 +23,15 @@
 
 ## Implementation
 
-1. Grid => 2D Array
+1. Game Rendering => CSS Grid
+2. Game State => 2D Array
 
     ```javascript
         grid[2][3]
              ^  ^
              X  Y 
     ```
-2. Cell State
+3. Cell State
 
     `0` = Dead  
     `1` = Live
@@ -50,11 +51,6 @@
 | ---                 | ---        | ---                                                             | 
 | Cellular Automation | A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells        | [Link](https://mathworld.wolfram.com/CellularAutomaton.html)    |
 |  Turing Complete    |  A system of data-manipulation rules (such as a computer's instruction set, a programming language, or a cellular automaton) is said to be Turing-complete or computationally universal if it can be used to simulate any Turing machine. This means that this system is able to recognize or decide other data-manipulation rule sets.   | [Link](https://en.wikipedia.org/wiki/Turing_completeness)               |
-
-## Tips
-| Title                 | Desc                                                  | 
-| ---                   | ---                                                   |
-| console.table(grid)   | will show 2D array in easily readable table format    |
 
 # Versions
 <details open>

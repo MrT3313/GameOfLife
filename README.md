@@ -59,7 +59,7 @@
 - User can update the size of the intial grid through the `<AppStateForm />` component
 - `<AppStateForm />` recieves the following props:
     1. currentSize={ `size` } => current `size` hook state from `<App />`
-    2. setSize={ `setSize` } => `size` stateSetter function from `<App />` function to be used on `<AppStateForm />` form submission 
+    2. setSize={ `setSize` } => `size` stateSetter function from `<App />` to be used on `<AppStateForm />` form submission 
 </details>
 <details>
 <summary>0.2.0 - Genration 0</summary>

@@ -9,7 +9,7 @@ function Cell(props) {
         <div
             className="cell"
             style={{
-                backgroundColor: status == 0 ? "black" : undefined,
+                backgroundColor: status === 0 ? "black" : undefined,
                 width: '20px',
                 height: '20px',
             }}

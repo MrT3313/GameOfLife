@@ -54,6 +54,14 @@
 
 # Versions
 <details open>
+<summary>0.3.0 - Grid Resizing</summary>
+
+- User can update the size of the intial grid through the `<AppStateForm />` component
+- `<AppStateForm />` recieves the following props:
+    1. currentSize={ `size` } => current `size` hook state from `<App />`
+    2. setSize={ `setSize` } => `size` stateSetter function from `<App />` to be used on `<AppStateForm />` form submission 
+</details>
+<details>
 <summary>0.2.0 - Genration 0</summary>
 
 - Using CSS Grid and the verious `<App />` component hook states to render the appropriate number of columns and rows

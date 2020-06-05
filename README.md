@@ -46,6 +46,7 @@
     A - Random => Loop through all cells and randomly fill with `0` or `1`  
     B - Pre Defined => Developer created or community built initial configurations    
     C - User Created => starting with all `0's` a user can click to change a cell state before starting the game 
+3. Render Initial State (Generation: 0)
 
 --- 
 
@@ -59,4 +60,27 @@
 | Title                 | Desc                                                  | 
 | ---                   | ---                                                   |
 | console.table(grid)   | will show 2D array in easily readable table format    |
+
+# Versions
+<details open>
+<summary>0.2.0 - Genration 0</summary>
+
+- Using CSS Grid and the verious `<App />` component hook states to render the appropriate number of columns and rows
+- Individually each row and column is made up of rendering individual `<Cell />` components which recieve the following props:  
+    1. `key`={ `col`-`row` }
+    2. `status`={ `grid[col][row]` }
+- `<Cell />` components are individually styled so that a `0` / `dead` status is black and a `1` / `live` status is white.  
+
+- Set Initial State  
+    ✅ - Random  
+    ❌ - PreDefined  
+    ❌ - User Created (onClick interaction)  
+</details>
+
+<details>
+<summary>0.1.0 - Initial Commit</summary>
+
+- Initial Project Outline / Explanation
+- Rendering `Hello World` after cleaning out initial Create React App project structure
+</details>
  

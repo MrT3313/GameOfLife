@@ -12,7 +12,6 @@ import Cell from './components/Cell.js'
 function App() {
   // State
   const [size, setSize] = useState(10)
-
   const [grid, setGrid] = useState([])
   const [generation, setGeneration] = useState(0)
 
@@ -20,7 +19,6 @@ function App() {
   useEffect(() => {
   console.log('<App /> UseEffect Triggered')
 
-  // -- //
     // Make Empty Grid
     let emptyGrid = make_2Darray(size)
 
@@ -36,10 +34,27 @@ function App() {
     
   }, [size])
 
+  // Methods
+  const clearGrid = () => {
+    // Make Empty Grid
+    let emptyGrid = make_2Darray(size)
+
+    // Fill Grid
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        emptyGrid[i][j] = 0
+      }
+    }
+
+    // Update State
+    setGrid(emptyGrid)
+  }
+
   return (
     <div className="App">
       <h1>Game Of Life</h1>
       <AppStateForm 
+        clearGrid={clearGrid}
         currentSize={size}
         setSize={setSize}
       />

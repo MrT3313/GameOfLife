@@ -13,6 +13,7 @@ import Cell from './components/Cell.js'
 function App() {
   // State
   const [size, setSize] = useState(10)
+
   const [grid, setGrid] = useState([])
   const [generation, setGeneration] = useState(0)
 

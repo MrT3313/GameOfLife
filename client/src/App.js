@@ -85,7 +85,6 @@ function App() {
                   grid={grid}
                   i={i}
                   k={k} 
-                  status={grid[i][k]}
                   toggleCellStatus={toggleCellStatus}
                 />
               ) 

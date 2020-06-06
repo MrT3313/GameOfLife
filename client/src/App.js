@@ -52,7 +52,7 @@ function App() {
     setGrid(emptyGrid)
   }
 
-  // // 2 - Toggle Cell State
+  // 2 - Toggle Cell State
   const toggleCellStatus = (i,k) => {
     // Immutable State Update => immer 
     const newGrid = produce(grid, gridCopy => {

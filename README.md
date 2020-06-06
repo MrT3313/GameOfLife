@@ -54,6 +54,17 @@
 
 # Versions
 <details open>
+<summary>0.4.0 - User Created Initial State</summary>
+
+- `<Cell />` components have an onClick function passed from `<App />` that uses [immer](https://www.npmjs.com/package/immer) to immutably update the `<App />` grid state with the toggled individual `<Cell />` status
+- `<AppStateForm />` can now clear the randomly generated initial board => This combined with the ability to toggle individual cells allows the user to generate their own initial state / generation 0
+
+- Set Initial State  
+    ✅ - Random  
+    ❌ - PreDefined  
+    ✅ - User Created (onClick interaction)  
+</details>
+<details>
 <summary>0.3.0 - Grid Resizing</summary>
 
 - User can update the size of the intial grid through the `<AppStateForm />` component

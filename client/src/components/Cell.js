@@ -3,16 +3,21 @@ import React from 'react'
 
 // MAIN
 function Cell(props) {
-    const {status} = props
+    const {
+        grid,
+        i, k,
+        toggleCellStatus
+    } = props
 
     return (
         <div
             className="cell"
             style={{
-                backgroundColor: status === 0 ? "black" : undefined,
+                backgroundColor: grid[i][k] === 0 ? "black" : undefined,
                 width: '20px',
                 height: '20px',
             }}
+            onClick={() => toggleCellStatus(i,k)}
         />
     )
 }

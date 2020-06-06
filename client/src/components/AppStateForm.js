@@ -3,7 +3,10 @@ import React, {useState} from 'react'
 
 // MAIN
 function AppStateForm(props) {
-    const { currentSize, setSize } = props
+    const { 
+        clearGrid,
+        currentSize, setSize,
+    } = props
 
     // State
     const [newSize, setNewSize] = useState(currentSize)
@@ -15,7 +18,9 @@ function AppStateForm(props) {
     }
 
     return (
+        <>
         <form 
+            className="resizeGrid"
             onSubmit={submitHelper}
         >
             <label>Grid Size: </label>
@@ -27,6 +32,12 @@ function AppStateForm(props) {
             />
             <button>Update Grid</button>
         </form>
+        <button
+            onClick={clearGrid}
+        >
+            Clear Grid
+        </button>
+        </>
     )
 }
 

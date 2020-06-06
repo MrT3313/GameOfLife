@@ -54,20 +54,51 @@
 
 # Versions
 <details open>
+<summary>0.4.0 - User Created Initial State</summary>
+
+- `<Cell />` components have an onClick function passed from `<App />` that uses [immer](https://www.npmjs.com/package/immer) to immutably update the `<App />` grid state with the toggled individual `<Cell />` status
+- `<AppStateForm />` can now clear the randomly generated initial board => This combined with the ability to toggle individual cells allows the user to generate their own initial state / generation 0
+
+- `<Cell />` Props:  
+    - Removed:
+        1. `status`={ `grid[col][row]` }
+
+    - Updated Props:  
+        1. `key`={ `col`-`row` } => Unique Identifier
+        2. `grid` = { `grid` } => Game State
+        3. `i` = { `i` } => Column
+        4. `k` = { `k` } => Row
+        5. `toggleCellStatus` = { `toggleCellStatus` } => Individual Cell Interaction
+
+- Set Initial State  
+    ✅ - Random  
+    ❌ - PreDefined  
+    ✅ - User Created (onClick interaction)  
+</details>
+<details>
 <summary>0.3.0 - Grid Resizing</summary>
 
 - User can update the size of the intial grid through the `<AppStateForm />` component
-- `<AppStateForm />` recieves the following props:
-    1. currentSize={ `size` } => current `size` hook state from `<App />`
-    2. setSize={ `setSize` } => `size` stateSetter function from `<App />` to be used on `<AppStateForm />` form submission 
+
+- `<App />` State Updates:
+    - Removed:
+        1. [cols, setCols]
+        2. [rows, setRows]
+    
+    - Updated State:
+        1. [size, setSize]
+
+- `<AppStateForm />` Props:
+    1. `currentSize` = { `size` } => current `size` hook state from `<App />`
+    2. `setSize` = { `setSize` } => `size` stateSetter function from `<App />` to be used on `<AppStateForm />` form submission 
 </details>
 <details>
 <summary>0.2.0 - Genration 0</summary>
 
-- Using CSS Grid and the verious `<App />` component hook states to render the appropriate number of columns and rows
+- Using CSS Grid and the various `<App />` component hook states to render the appropriate number of columns and rows
 - Individually each row and column is made up of rendering individual `<Cell />` components which recieve the following props:  
-    1. `key`={ `col`-`row` }
-    2. `status`={ `grid[col][row]` }
+    1. `key` = { `col`-`row` }
+    2. `status` ={  `grid[col][row]` }
 - `<Cell />` components are individually styled so that a `0` / `dead` status is black and a `1` / `live` status is white.  
 
 - Set Initial State  

@@ -1,5 +1,6 @@
 // IMPORTS
 import React, {useState, useEffect} from 'react';
+import produce from 'immer'
 
 // FUNCTIONS
 import { make_2Darray } from './utils/make_2Darray.js'
@@ -20,7 +21,6 @@ function App() {
   useEffect(() => {
   console.log('<App /> UseEffect Triggered')
 
-  // -- //
     // Make Empty Grid
     let emptyGrid = make_2Darray(size)
 
@@ -36,10 +36,38 @@ function App() {
     
   }, [size])
 
+  // Methods
+  // 1 - Clear Grid
+  const clearGrid = () => {
+    // Make Empty Grid
+    let emptyGrid = make_2Darray(size)
+
+    // Fill Grid
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        emptyGrid[i][j] = 0
+      }
+    }
+
+    // Update State
+    setGrid(emptyGrid)
+  }
+
+  // 2 - Toggle Cell State
+  const toggleCellStatus = (i,k) => {
+    // Immutable State Update => immer 
+    const newGrid = produce(grid, gridCopy => {
+      gridCopy[i][k] = grid[i][k] === 0 ? 1 : 0
+    })
+    // Update State
+    setGrid(newGrid)
+  }
+
   return (
     <div className="App">
       <h1>Game Of Life</h1>
       <AppStateForm 
+        clearGrid={clearGrid}
         currentSize={size}
         setSize={setSize}
       />
@@ -52,7 +80,15 @@ function App() {
       >
         {grid.map((rows, i) => {
             return rows.map((col, k) => {
-              return <Cell key={`${i}-${k}`} status={grid[i][k]}/> 
+              return (
+                <Cell 
+                  key={`${i}-${k}`}
+                  grid={grid}
+                  i={i}
+                  k={k} 
+                  toggleCellStatus={toggleCellStatus}
+                />
+              ) 
             })
           })
         }

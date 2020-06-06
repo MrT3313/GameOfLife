@@ -5,7 +5,7 @@ import React, {useState} from 'react'
 function AppStateForm(props) {
     const { 
         clearGrid,
-        currentSize, setSize 
+        currentSize, setSize,
     } = props
 
     // State

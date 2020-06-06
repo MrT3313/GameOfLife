@@ -1,5 +1,6 @@
 // IMPORTS
 import React, {useState, useEffect} from 'react';
+import produce from 'immer'
 
 // FUNCTIONS
 import { make_2Darray } from './utils/make_2Darray.js'
@@ -35,6 +36,7 @@ function App() {
   }, [size])
 
   // Methods
+  // 1 - Clear Grid
   const clearGrid = () => {
     // Make Empty Grid
     let emptyGrid = make_2Darray(size)
@@ -48,6 +50,16 @@ function App() {
 
     // Update State
     setGrid(emptyGrid)
+  }
+
+  // // 2 - Toggle Cell State
+  const toggleCellStatus = (i,k) => {
+    // Immutable State Update => immer 
+    const newGrid = produce(grid, gridCopy => {
+      gridCopy[i][k] = grid[i][k] === 0 ? 1 : 0
+    })
+    // Update State
+    setGrid(newGrid)
   }
 
   return (
@@ -67,7 +79,16 @@ function App() {
       >
         {grid.map((rows, i) => {
             return rows.map((col, k) => {
-              return <Cell key={`${i}-${k}`} status={grid[i][k]}/> 
+              return (
+                <Cell 
+                  key={`${i}-${k}`}
+                  grid={grid}
+                  i={i}
+                  k={k} 
+                  status={grid[i][k]}
+                  toggleCellStatus={toggleCellStatus}
+                />
+              ) 
             })
           })
         }

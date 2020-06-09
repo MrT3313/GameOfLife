@@ -9,6 +9,7 @@ import produce from 'immer'
 // FUNCTIONS
 import { empty2Darray } from './utils/empty2Darray.js'
 import { randomGrid } from './utils/randomGrid.js'
+import { clearGrid } from './utils/clearGrid.js'
 import { countNeighbors } from './utils/countNeighbors.js'
 
 // COMPONENTS
@@ -17,8 +18,8 @@ import Cell from './components/Cell.js'
 
 // __MAIN__
 function App() {
-  // State
-  const [size, setSize] = useState(10)
+  // STATE
+  const [size, setSize] = useState(20)
   const [grid, setGrid] = useState([])
   const [simSpeed, setSimSpeed] = useState(1000)
   
@@ -26,7 +27,7 @@ function App() {
   const runningRef = useRef(isRunning) // runningRef == "Ref CONTAINER"
   runningRef.current = isRunning
 
-  // UseEffect => Game Setup
+  // USE EFFECT
   useEffect(() => {
   console.log('<App /> UseEffect Triggered')
 
@@ -34,33 +35,18 @@ function App() {
   
   }, [size])
 
-  // Methods
-  // 1 - Clear Grid
-  const clearGrid = () => {
-    // Make Empty Grid
-    let emptyGrid = empty2Darray(size)
-
-    // Fill Grid
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        emptyGrid[i][j] = 0
-      }
-    }
-
-    // Update State
-    setGrid(emptyGrid)
+  // METHODS
+  // - 1 - Clear Grid
+  const clear = () => {
+    setGrid(clearGrid(empty2Darray(size), size))
   }
 
-  // 2 - Randomize Grid
+  // - 2 - Randomize Grid
   const randomize = () => {
-    // Make Empty Grid
-    let emptyGrid = empty2Darray(size)
-
-    // Randomize Grid
-    setGrid(randomGrid(emptyGrid, size))
+    setGrid(randomGrid(empty2Darray(size), size))
   }
 
-  // 3 - Toggle Cell State
+  // - 3 - Toggle Cell State
   const toggleCellStatus = (i,k) => {
     // Immutable State Update => immer 
     const newGrid = produce(grid, gridCopy => {
@@ -70,48 +56,52 @@ function App() {
     setGrid(newGrid)
   }
 
-  // 4 - Start Simulation
+  // - 4 - Start Simulation
   const toggleSimulation = () => {
-    // 1 - Update Running State
+    // - A - Update Running State
     setRunning(!isRunning)
 
-    // 2 - State not changing fast enough?
+    // - B - State not changing fast enough? ==> state update 'race condition' 
     runningRef.current = true
 
-    // 3 - Call Simulation Function 
+    // - C - Call Simulation Function 
     runSimulation()
   }
 
-  // 5 - Run Simulation
+  // - 5 - Run Simulation
   // Function is only being made ONCE (not made and passed on every render)
   // BUT still trying to access 'isRunning' variable that could update at anytime
   // -- useRef()
   const runSimulation = useCallback(() => {
-    // Check if we are currently running
+    // - A - Check if we are currently running
     // This would be the "Base Case" if we are thining recursivly => our function escape
     if (!runningRef.current) {
       return; 
     }
 
-    // *** SIMULATION LOGIC ***
+    // - B - SIMULATION LOGIC ***
     runIteration()
 
-    // SetTimeout
+    // - C - SetTimeout
     setTimeout(runSimulation, simSpeed)  
   }, [])
 
-  // 6 - Iteration
+  // - 6 - Iteration
   const runIteration = () => {
     setGrid(g => {
       return produce(g, gridCopy => {
         // console.log(size)
+
+        // - A - Main Loop
         for (let i = 0; i < size; i++) {
           for (let k = 0; k < size; k++) {
+            // - B - Count Neighbors
             let neighbors = countNeighbors(g, i, k, size)
             if (neighbors > 0) {
-              console.log(`runIteration => cell [${i},${k}] has ${neighbors} neighbors`)
+              // console.log(`runIteration => cell [${i},${k}] has ${neighbors} neighbors`)
             }
 
+            // - C - Core Game Cell Update Logic
             if (neighbors < 2 || neighbors > 3) {
               gridCopy[i][k] = 0
             } else if (g[i][k] === 0 && neighbors === 3) {
@@ -127,8 +117,8 @@ function App() {
     <div className="App">
       <h1>Game Of Life</h1>
       <AppStateForm 
-      randomize={randomize}
-        clearGrid={clearGrid}
+        randomize={randomize}
+        clear={clear}
         currentSize={size}
         setSize={setSize}
         isRunning={isRunning}

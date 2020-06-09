@@ -4,10 +4,8 @@ import React, {useState} from 'react'
 // MAIN
 function AppStateForm(props) {
     const { 
-        randomize,
-        clearGrid,
+        randomize, clear,
         currentSize, setSize,
-        // runSimulation, runningRef, setRunning,
         isRunning,
         toggleSimulation, 
     } = props
@@ -38,19 +36,19 @@ function AppStateForm(props) {
             <button>Update Grid</button>
         </form>
         <button
-            onClick={clearGrid}
+            onClick={clear}
         >
             Clear Grid
-        </button>
-        <button
-            onClick={toggleSimulation}
-        >
-            {isRunning ? 'stop' : 'start'}
         </button>
         <button
             onClick={randomize}
         >
             Randomize Grid
+        </button>
+        <button
+            onClick={toggleSimulation}
+        >
+            {isRunning ? 'Stop' : 'Start'}
         </button>
         </>
     )

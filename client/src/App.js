@@ -132,19 +132,18 @@ function App() {
         }}
       >
         {grid.map((rows, i) => {
-            return rows.map((col, k) => {
-              return (
-                <Cell 
-                  key={`${i}-${k}`}
-                  grid={grid}
-                  i={i}
-                  k={k} 
-                  toggleCellStatus={toggleCellStatus}
-                />
-              ) 
-            })
+          return rows.map((col, k) => {
+            return (
+              <Cell 
+                key={`${i}-${k}`}
+                grid={grid}
+                i={i}
+                k={k} 
+                toggleCellStatus={toggleCellStatus}
+              />
+            ) 
           })
-        }
+        })}
       </div>
     </div>
   );

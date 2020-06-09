@@ -6,6 +6,9 @@ function AppStateForm(props) {
     const { 
         clearGrid,
         currentSize, setSize,
+        // runSimulation, runningRef, setRunning,
+        isRunning,
+        toggleSimulation, 
     } = props
 
     // State
@@ -29,6 +32,7 @@ function AppStateForm(props) {
                 placeholder={currentSize}
                 value={newSize}
                 onChange={e => setNewSize(parseInt(e.target.value))}
+                style={{width:"50px"}}
             />
             <button>Update Grid</button>
         </form>
@@ -36,6 +40,11 @@ function AppStateForm(props) {
             onClick={clearGrid}
         >
             Clear Grid
+        </button>
+        <button
+            onClick={toggleSimulation}
+        >
+            {isRunning ? 'stop' : 'start'}
         </button>
         </>
     )

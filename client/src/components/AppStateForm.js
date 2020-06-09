@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 // MAIN
 function AppStateForm(props) {
     const { 
+        randomize,
         clearGrid,
         currentSize, setSize,
         // runSimulation, runningRef, setRunning,
@@ -45,6 +46,11 @@ function AppStateForm(props) {
             onClick={toggleSimulation}
         >
             {isRunning ? 'stop' : 'start'}
+        </button>
+        <button
+            onClick={randomize}
+        >
+            Randomize Grid
         </button>
         </>
     )

@@ -7,7 +7,9 @@ import React,
 import produce from 'immer'
 
 // FUNCTIONS
-import { make_2Darray } from './utils/make_2Darray.js'
+import { empty2Darray } from './utils/empty2Darray.js'
+import { randomGrid } from './utils/randomGrid.js'
+import { countNeighbors } from './utils/countNeighbors.js'
 
 // COMPONENTS
 import AppStateForm from './components/AppStateForm.js'
@@ -24,41 +26,19 @@ function App() {
   const runningRef = useRef(isRunning) // runningRef == "Ref CONTAINER"
   runningRef.current = isRunning
 
-  const operations = [
-    [0, 1],
-    [0, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-    [-1, -1],
-    [1, 0],
-    [-1, 0],
-  ]
-
   // UseEffect => Game Setup
   useEffect(() => {
   console.log('<App /> UseEffect Triggered')
 
-    // Make Empty Grid
-    let emptyGrid = make_2Darray(size)
-
-    // Fill Grid
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        emptyGrid[i][j] = Math.floor(Math.random() * 2)
-      }
-    }
-    
-    // Update State
-    setGrid(emptyGrid)
-    
+  randomize()
+  
   }, [size])
 
   // Methods
   // 1 - Clear Grid
   const clearGrid = () => {
     // Make Empty Grid
-    let emptyGrid = make_2Darray(size)
+    let emptyGrid = empty2Darray(size)
 
     // Fill Grid
     for (let i = 0; i < size; i++) {
@@ -71,7 +51,16 @@ function App() {
     setGrid(emptyGrid)
   }
 
-  // 2 - Toggle Cell State
+  // 2 - Randomize Grid
+  const randomize = () => {
+    // Make Empty Grid
+    let emptyGrid = empty2Darray(size)
+
+    // Randomize Grid
+    setGrid(randomGrid(emptyGrid, size))
+  }
+
+  // 3 - Toggle Cell State
   const toggleCellStatus = (i,k) => {
     // Immutable State Update => immer 
     const newGrid = produce(grid, gridCopy => {
@@ -81,7 +70,7 @@ function App() {
     setGrid(newGrid)
   }
 
-  // 3 - Start Simulation
+  // 4 - Start Simulation
   const toggleSimulation = () => {
     // 1 - Update Running State
     setRunning(!isRunning)
@@ -93,7 +82,7 @@ function App() {
     runSimulation()
   }
 
-  // 4 - Run Simulation
+  // 5 - Run Simulation
   // Function is only being made ONCE (not made and passed on every render)
   // BUT still trying to access 'isRunning' variable that could update at anytime
   // -- useRef()
@@ -111,16 +100,16 @@ function App() {
     setTimeout(runSimulation, simSpeed)  
   }, [])
 
-  // 5 - Run Iteration
+  // 6 - Iteration
   const runIteration = () => {
     setGrid(g => {
       return produce(g, gridCopy => {
         // console.log(size)
         for (let i = 0; i < size; i++) {
           for (let k = 0; k < size; k++) {
-            let neighbors = countNeighbors(g, i, k)
+            let neighbors = countNeighbors(g, i, k, size)
             if (neighbors > 0) {
-              // console.log(`runIteration => cell [${i},${k}] has ${neighbors} neighbors`)
+              console.log(`runIteration => cell [${i},${k}] has ${neighbors} neighbors`)
             }
 
             if (neighbors < 2 || neighbors > 3) {
@@ -134,27 +123,11 @@ function App() {
     })
   }
 
-  // 6 - Count Neighbors
-  const countNeighbors = (grid, colIdx, rowIdx) => {
-    let result = 0
-
-    operations.forEach(([x, y]) => {
-      const newColIdx = colIdx + x
-      const newRowIdx = rowIdx + y
-      
-      if (newColIdx >= 0 && newColIdx < size && newRowIdx >= 0 && newRowIdx < size) {
-        result += grid[newColIdx][newRowIdx]
-      }
-    })
-
-    // RETURN
-    return result
-  }
-
   return (
     <div className="App">
       <h1>Game Of Life</h1>
       <AppStateForm 
+      randomize={randomize}
         clearGrid={clearGrid}
         currentSize={size}
         setSize={setSize}

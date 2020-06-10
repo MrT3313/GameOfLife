@@ -14,8 +14,9 @@ function Cell(props) {
             className="cell"
             style={{
                 backgroundColor: grid[i][k] === 0 ? "black" : undefined,
-                width: '20px',
-                height: '20px',
+                width: '10px',
+                height: '10px',
+                // border: '.5px solid black'
             }}
             onClick={() => toggleCellStatus(i,k)}
         />

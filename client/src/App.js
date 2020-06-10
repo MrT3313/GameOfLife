@@ -7,7 +7,7 @@ import React,
 import produce from 'immer'
 
 // FUNCTIONS
-import { empty2Darray } from './utils/empty2Darray.js'
+import { empty2Dgrid } from './utils/empty2Dgrid.js'
 import { randomGrid } from './utils/randomGrid.js'
 import { clearGrid } from './utils/clearGrid.js'
 import { countNeighbors } from './utils/countNeighbors.js'
@@ -16,12 +16,16 @@ import { countNeighbors } from './utils/countNeighbors.js'
 import AppStateForm from './components/AppStateForm.js'
 import Cell from './components/Cell.js'
 
+// STYLES
+import './styles/app.css'
+import './styles/index.css'
+
 // __MAIN__
 function App() {
   // STATE
-  const [size, setSize] = useState(20)
+  const [size, setSize] = useState(30)
   const [grid, setGrid] = useState([])
-  const [simSpeed, setSimSpeed] = useState(1000)
+  const [simSpeed, setSimSpeed] = useState(500)
   
   const [isRunning, setRunning] = useState(false)
   const runningRef = useRef(isRunning) // runningRef == "Ref CONTAINER"
@@ -29,21 +33,24 @@ function App() {
 
   // USE EFFECT
   useEffect(() => {
-  console.log('<App /> UseEffect Triggered')
+    console.log('<App /> UseEffect Triggered')
 
-  randomize()
-  
+    randomize()
   }, [size])
 
   // METHODS
   // - 1 - Clear Grid
-  const clear = () => {
-    setGrid(clearGrid(empty2Darray(size), size))
+  const clear = (e) => {
+    e.preventDefault()
+    setGrid(clearGrid(empty2Dgrid(size), size))
   }
 
   // - 2 - Randomize Grid
-  const randomize = () => {
-    setGrid(randomGrid(empty2Darray(size), size))
+  const randomize = (e) => {
+    if (e) { // Allows successful call of randomize() from useEffect onload
+      e.preventDefault()
+    }
+    setGrid(randomGrid(empty2Dgrid(size), size))
   }
 
   // - 3 - Toggle Cell State
@@ -115,35 +122,37 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Game Of Life</h1>
-      <AppStateForm 
-        randomize={randomize}
-        clear={clear}
-        currentSize={size}
-        setSize={setSize}
-        isRunning={isRunning}
-        toggleSimulation={toggleSimulation}
-      />
-      <div
-        className="gridContainer"
-        style={{
-          display: `grid`,
-          gridTemplateColumns:  `repeat(${size}, 20px)`
-        }}
-      >
-        {grid.map((rows, i) => {
-          return rows.map((col, k) => {
-            return (
-              <Cell 
-                key={`${i}-${k}`}
-                grid={grid}
-                i={i}
-                k={k} 
-                toggleCellStatus={toggleCellStatus}
-              />
-            ) 
-          })
-        })}
+      <h1>Connway's Game Of Life</h1>
+      <div className="Game">
+        <div
+          className="gridContainer"
+          style={{
+            display: `grid`,
+            gridTemplateColumns:  `repeat(${size}, 10px)`
+          }}
+        >
+          {grid.map((rows, i) => {
+            return rows.map((col, k) => {
+              return (
+                <Cell 
+                  key={`${i}-${k}`}
+                  grid={grid}
+                  i={i}
+                  k={k} 
+                  toggleCellStatus={toggleCellStatus}
+                />
+              ) 
+            })
+          })}
+        </div>
+        <AppStateForm 
+          randomize={randomize}
+          clear={clear}
+          currentSize={size}
+          setSize={setSize}
+          isRunning={isRunning}
+          toggleSimulation={toggleSimulation}
+        />
       </div>
     </div>
   );

@@ -54,6 +54,27 @@
 
 # Versions
 <details open>
+<summary>0.5.0 - Initial Simulation</summary>
+
+
+- Simulation Logic
+    1. `toggleSimulation()`  
+        - A - Updates Running State
+            - `setRunning(!isRunning)`
+            - direct `runningRef` update to avoid race condition => `runningRef.current = true`
+        - B - Starts Simulation
+            - `runSimulation()`
+    2. `runSimulation()`
+        - 
+- Separated / Expanded Util Functions:  
+    1. `empty2Dgrid()`
+    2. `randomGrid()`
+    3. `clearGrid()`
+    4. `countNeighbors()`
+
+</details>
+
+<details open>
 <summary>0.4.0 - User Created Initial State</summary>
 
 - `<Cell />` components have an onClick function passed from `<App />` that uses [immer](https://www.npmjs.com/package/immer) to immutably update the `<App />` grid state with the toggled individual `<Cell />` status

@@ -1,4 +1,4 @@
-export function empty2Darray(cols, rows) {
+export function empty2Dgrid(cols, rows) {
     let array = new Array(cols);
 
     for (let i = 0; i < array.length; i++) {

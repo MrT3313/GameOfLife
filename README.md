@@ -8,13 +8,13 @@
 ## Game Rules
 - "Live" Cell:  
 
-    1. Each cells with < 2 neighbors DIE (underpopulation)
-    2. Each cells with 2 or 3 neighbors SURVIVE to next generation
-    3. Each cells with > 3 neighbors DIE (overpopulation)
+    1. Cells with < 2 neighbors `die` (underpopulation)
+    2. Cells with 2 or 3 neighbors `live` on to next generation
+    3. Cells with > 3 neighbors `die` (overpopulation)
 
 - "Dead" Cell:
 
-    1. A cell with 3 neighbors BECOMES LIVE
+    1. A cell with 3 neighbors become `live`
 
 ## Educational Links
 1. John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.com/watch?v=R9Plq-D1gEk)
@@ -23,13 +23,13 @@
 
 ## Implementation
 
-1. Game Rendering => CSS Grid
+1. Game Board => CSS Grid
 2. Game State => 2D Array
 
     ```javascript
-        grid[2][3]
-             ^  ^
-             X  Y 
+        grid [2] [3]
+              ^   ^
+             col  row 
     ```
 3. Cell State
 
@@ -37,12 +37,20 @@
     `1` = Live
 
 ## Steps
-1. Build EMPTY Grid 
+1. Build empty Grid 
 2. Set Initial State  
     A - Random => Loop through all cells and randomly fill with `0` or `1`  
     B - Pre Defined => Developer created or community built initial configurations    
     C - User Created => starting with all `0's` a user can click to change a cell state before starting the game 
 3. Render Initial State (Generation: 0)
+4. Run Simulation  
+    `A` - Update application `running` state  
+    `B` - Iterate through then `<App />` state grid   
+    `C` - Count neighbors for individual cells  
+    `D` - Update individual cells based on game rules regarding number of neighbors     
+    `E` - Immutably update `<App />` state grid  
+    `F` - Utilize a timeout to space out simulation iterations  
+    `G` - Loop back to  
 
 --- 
 
@@ -54,18 +62,29 @@
 
 # Versions
 <details open>
-<summary>0.5.0 - Initial Simulation</summary>
+<summary>0.5.0 - Initial Simulation w/ Initial Styling</summary>
 
+<img src="client/src/assets/0.5.0_ConwaysGameOfLife.png" width='500'>
 
-- Simulation Logic
+- Simulation is working! Logic is comprised of 4 functions
     1. `toggleSimulation()`  
-        - A - Updates Running State
-            - `setRunning(!isRunning)`
-            - direct `runningRef` update to avoid race condition => `runningRef.current = true`
-        - B - Starts Simulation
-            - `runSimulation()`
-    2. `runSimulation()`
-        - 
+        - Updates `isRunning` state & a direct update to the `runningRef.current` as to prevent a race condition
+    2. `runSimulation() = useCallback(() => {...})` 
+        - uses the `useCallback` hook to memoize the function (only made once) unless a dependency changes
+        - uses a `runningRef` to access `isRunning state to check if the simulation is still running => aka should it call another iteration
+        - uses a `setTimeout()` to space our iterations
+    3. `runIteration()`
+        - uses immer's `produce()` function for immutable state  updates
+        - loops through all cells `countNeighbors()` on each cell => executes individual `<Cell />` state update in accordance with the rules of the game
+    4. `countNeighbors()`
+        - util function that loops through all neighbors and sums their individual state values. This will get the number of indivdual "live" cells (`<Cell />` state === `1`)
+
+
+- Updated `<App />` Methods
+    1. `clear()` => clear all grid cells => 0
+    2. `randomize()` => randomice all grid cell values
+    3. `toggleCellStatus()` => `<Cell />` onClick changes individual cell value
+         
 - Separated / Expanded Util Functions:  
     1. `empty2Dgrid()`
     2. `randomGrid()`
@@ -74,7 +93,7 @@
 
 </details>
 
-<details open>
+<details>
 <summary>0.4.0 - User Created Initial State</summary>
 
 - `<Cell />` components have an onClick function passed from `<App />` that uses [immer](https://www.npmjs.com/package/immer) to immutably update the `<App />` grid state with the toggled individual `<Cell />` status
@@ -90,6 +109,15 @@
         3. `i` = { `i` } => Column
         4. `k` = { `k` } => Row
         5. `toggleCellStatus` = { `toggleCellStatus` } => Individual Cell Interaction
+
+- `<AppStateForm />` Props:
+    - Updates Props:
+        1. `randomize` = { `randomize` }
+        2. `clear` = { `clear` }
+        3. `currentSize` = { `size` }
+        4. `setSize` = { `setSize` }
+        5. `isRunning` = { `isRunning` }
+        6. `toggleSimulation` = { `toggleSimulation` }
 
 - Set Initial State  
     ✅ - Random  

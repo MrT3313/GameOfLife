@@ -31,7 +31,7 @@ function AppStateForm(props) {
                     - size state does not seem to be getting to simulation function 
                         - does this need a useRef like the "running" state since the function is only being made once?
                 */}
-                {/* <form className="updateGrid"
+                <form className="updateGrid"
                     onSubmit={submitHelper}
                 >
                     <label>Grid Size: </label>
@@ -43,7 +43,7 @@ function AppStateForm(props) {
                         style={{width:"50px"}}
                     />
                     <button>Update Grid</button>
-                </form> */}
+                </form>
                 <form className="generationZeroStates">
                     <button onClick={e => clear(e)}>
                         Clear Grid

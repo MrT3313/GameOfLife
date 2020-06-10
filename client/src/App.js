@@ -91,7 +91,7 @@ function App() {
 
     // - C - SetTimeout
     setTimeout(runSimulation, simSpeed)  
-  }, [])
+  }, [size])
 
   // - 6 - Iteration
   const runIteration = () => {
@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Connway's Game Of Life</h1>
+      <h1>Conway's Game Of Life</h1>
       <div className="Game">
         <div
           className="gridContainer"

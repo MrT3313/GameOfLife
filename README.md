@@ -3,9 +3,16 @@
 "The Game of Life, also known simply as Life, is a `cellular automaton` devised by the British mathematician John Horton Conway in 1970. It is a `zero-player game`, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is `Turing complete` and can simulate a universal constructor or any other Turing machine."  
         ~[Link](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
+John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.com/watch?v=R9Plq-D1gEk)
+
+| Term                | Definition | Link                                                            | 
+| ---                 | ---        | ---                                                             | 
+| Cellular Automation | A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells        | [Link](https://mathworld.wolfram.com/CellularAutomaton.html)    |
+|  Turing Complete    |  A system of data-manipulation rules (such as a computer's instruction set, a programming language, or a cellular automaton) is said to be Turing-complete or computationally universal if it can be used to simulate any Turing machine. This means that this system is able to recognize or decide other data-manipulation rule sets.   | [Link](https://en.wikipedia.org/wiki/Turing_completeness)               |
+
 --- 
 
-## Game Rules
+# Game Rules
 - "Live" Cell:  
 
     1. Cells with < 2 neighbors `die` (underpopulation)
@@ -14,15 +21,13 @@
 
 - "Dead" Cell:
 
-    1. A cell with 3 neighbors become `live`
-
-## Educational Links
-1. John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.com/watch?v=R9Plq-D1gEk)
+    1. A cell with 3 neighbors becomes `live`
 
 --- 
 
-## Implementation
+# Implementation
 
+## Structure
 1. Game Board => CSS Grid
 2. Game State => 2D Array
 
@@ -41,24 +46,18 @@
 2. Set Initial State  
     A - Random => Loop through all cells and randomly fill with `0` or `1`  
     B - Pre Defined => Developer created or community built initial configurations    
-    C - User Created => starting with all `0's` a user can click to change a cell state before starting the game 
+    C - User Created => starting with all `0's` a user can click to change a cell state before starting the simulation 
 3. Render Initial State (Generation: 0)
 4. Run Simulation  
     `A` - Update application `running` state  
-    `B` - Iterate through then `<App />` state grid   
+    `B` - Iterate through the `<App />` state grid   
     `C` - Count neighbors for individual cells  
     `D` - Update individual cells based on game rules regarding number of neighbors     
     `E` - Immutably update `<App />` state grid  
     `F` - Utilize a timeout to space out simulation iterations  
-    `G` - Loop back to  
+    `G` - Loop back to A 
 
 --- 
-
-## Glossary
-| Term                | Definition | Link                                                            | 
-| ---                 | ---        | ---                                                             | 
-| Cellular Automation | A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells        | [Link](https://mathworld.wolfram.com/CellularAutomaton.html)    |
-|  Turing Complete    |  A system of data-manipulation rules (such as a computer's instruction set, a programming language, or a cellular automaton) is said to be Turing-complete or computationally universal if it can be used to simulate any Turing machine. This means that this system is able to recognize or decide other data-manipulation rule sets.   | [Link](https://en.wikipedia.org/wiki/Turing_completeness)               |
 
 # Versions
 <details open>
@@ -71,19 +70,14 @@
         - Updates `isRunning` state & a direct update to the `runningRef.current` as to prevent a race condition
     2. `runSimulation() = useCallback(() => {...})` 
         - uses the `useCallback` hook to memoize the function (only made once) unless a dependency changes
-        - uses a `runningRef` to access `isRunning state to check if the simulation is still running => aka should it call another iteration
-        - uses a `setTimeout()` to space our iterations
+        - uses a `runningRef` to access `isRunning` state to check if the simulation is still running => aka should it call another iteration
+        - uses a `setTimeout()` to space out iterations
     3. `runIteration()`
         - uses immer's `produce()` function for immutable state  updates
-        - loops through all cells `countNeighbors()` on each cell => executes individual `<Cell />` state update in accordance with the rules of the game
+        - loops through all cells and calls `countNeighbors()`
+        - executes individual `<Cell />` state updates based on game rules regarding number of neighbors     
     4. `countNeighbors()`
-        - util function that loops through all neighbors and sums their individual state values. This will get the number of indivdual "live" cells (`<Cell />` state === `1`)
-
-
-- Updated `<App />` Methods
-    1. `clear()` => clear all grid cells => 0
-    2. `randomize()` => randomice all grid cell values
-    3. `toggleCellStatus()` => `<Cell />` onClick changes individual cell value
+        - util function that loops through all neighbors and sums their individual state values. This will get the number of indivdual "live" cells (`<Cell />` state === `1`) surrounding the `<Cell />`
          
 - Separated / Expanded Util Functions:  
     1. `empty2Dgrid()`

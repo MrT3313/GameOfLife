@@ -25,12 +25,6 @@ function AppStateForm(props) {
     return (
         <div className="CONTAINER_appStateForm">
             <div className="controls">
-
-                {/* TODO: GRID RESIZING BUG 
-                    - grid can update and triggers new randomization
-                    - size state does not seem to be getting to simulation function 
-                        - does this need a useRef like the "running" state since the function is only being made once?
-                */}
                 <form className="updateGrid"
                     onSubmit={submitHelper}
                 >

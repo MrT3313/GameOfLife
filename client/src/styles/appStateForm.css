@@ -1,9 +1,6 @@
 .CONTAINER_appStateForm {
     display: flex;
     align-items: center;
-    
-    padding: 10px;
-    margin: 10px;
 }
 
 .controls {
@@ -26,5 +23,15 @@
 .simToggle {
     display: flex;
     justify-content: center;
+    
     width: 100%;
+
+    border-radius: 5px;
+}
+
+.simOFF {
+    background-color: red;
+}
+.simON {
+    background-color: green;
 }

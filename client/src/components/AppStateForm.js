@@ -25,7 +25,13 @@ function AppStateForm(props) {
     return (
         <div className="CONTAINER_appStateForm">
             <div className="controls">
-                <form className="updateGrid"
+
+                {/* TODO: GRID RESIZING BUG 
+                    - grid can update and triggers new randomization
+                    - size state does not seem to be getting to simulation function 
+                        - does this need a useRef like the "running" state since the function is only being made once?
+                */}
+                {/* <form className="updateGrid"
                     onSubmit={submitHelper}
                 >
                     <label>Grid Size: </label>
@@ -37,7 +43,7 @@ function AppStateForm(props) {
                         style={{width:"50px"}}
                     />
                     <button>Update Grid</button>
-                </form>
+                </form> */}
                 <form className="generationZeroStates">
                     <button onClick={e => clear(e)}>
                         Clear Grid
@@ -47,7 +53,7 @@ function AppStateForm(props) {
                     </button>
                 </form>
                 <button 
-                    className="simToggle"
+                    className={isRunning ? "simToggle simOFF" : "simToggle simON"}
                     onClick={toggleSimulation}
                 >
                     {isRunning ? 'Stop' : 'Start'}

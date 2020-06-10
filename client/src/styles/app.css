@@ -1,0 +1,35 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.Game { 
+    display: flex;
+    justify-content: space-around;
+
+    width: 100%;
+    padding: 10px;
+}
+
+.gridContainer {
+    background-color: lightgray;
+
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+h1 {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+
+    margin: 0 0 20px 0;
+}

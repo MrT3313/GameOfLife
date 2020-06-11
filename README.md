@@ -61,6 +61,15 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
 
 # Versions
 <details open>
+<summary>0.6.0 - Responsive Design: Desktop First</summary>
+
+- `Desktop First` uses a `max-width` approach to media breakpoints
+    - Desktop = Base Styles
+    - Mobile @ `640px`
+    - TODO: Grid resizing can negativly effect responsive styling. Need to find a way to attach breakpoints to the width of the `<GridContainer />` within the `<Game />`.
+</details>
+
+<details>
 <summary>0.5.0 - Initial Simulation w/ Initial Styling</summary>
 
 <img src="client/src/assets/0.5.0_ConwaysGameOfLife.png" width='500'>

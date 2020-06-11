@@ -56,20 +56,27 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
     `G` - Loop back to A 
 
 # Versions
-<details open>
+<details>
 <summary>1.0.0 - Live Hosting</summary>
 
 [Live Project Link](https://turgeon-gameoflife.netlify.app)
 
 </details>
 
-<details>
+<details open>
 <summary>0.6.0 - Responsive Design: Desktop First</summary>
 
 - `Desktop First` uses a `max-width` approach to media breakpoints
     - Desktop = Base Styles
     - Mobile @ `640px`
     - TODO: Grid resizing can negativly effect responsive styling. Need to find a way to attach breakpoints to the width of the `<GridContainer />` within the `<Game />`.
+
+Desktop Styles:  
+<img src="client/src/assets/0.6.0_DesktopStyles.png" width='400'>
+
+Mobile Styles:  
+<img src="client/src/assets/0.6.0_MobileStyles.png" height='400'>
+
 </details>
 
 <details>

@@ -17,8 +17,8 @@ import AppStateForm from './components/AppStateForm.js'
 import Cell from './components/Cell.js'
 
 // STYLES
-import './styles/app.css'
 import './styles/index.css'
+import './styles/app.css'
 
 // __MAIN__
 function App() {

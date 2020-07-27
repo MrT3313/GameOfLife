@@ -81,7 +81,7 @@ function App() {
 
     // - C - SetTimeout
     setTimeout(runSimulation, simSpeed)  
-  }, [size])
+  }, [size, simSpeed])
 
   return (
     <div className="App">

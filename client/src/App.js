@@ -10,7 +10,7 @@ import produce from 'immer'
 import { empty2Dgrid } from './utils/empty2Dgrid.js'
 import { randomGrid } from './utils/randomGrid.js'
 import { clearGrid } from './utils/clearGrid.js'
-import { countNeighbors } from './utils/countNeighbors.js'
+import runIteration from './utils/runIteration.js'
 
 // COMPONENTS
 import AppStateForm from './components/AppStateForm.js'
@@ -25,7 +25,7 @@ function App() {
   // STATE
   const [size, setSize] = useState(30)
   const [grid, setGrid] = useState([])
-  const [simSpeed, setSimSpeed] = useState(500)
+  const [simSpeed] = useState(500)
   
   const [isRunning, setRunning] = useState(false)
   const runningRef = useRef(isRunning) // runningRef == "Ref CONTAINER"
@@ -39,18 +39,18 @@ function App() {
   }, [size])
 
   // METHODS
-  // - 1 - Clear Grid
-  const clear = (e) => {
-    e.preventDefault()
-    setGrid(clearGrid(empty2Dgrid(size), size))
-  }
-
-  // - 2 - Randomize Grid
+  // - 1 - Randomize Grid
   const randomize = (e) => {
     if (e) { // Allows successful call of randomize() from useEffect onload
       e.preventDefault()
     }
     setGrid(randomGrid(empty2Dgrid(size), size))
+  }
+
+  // - 2 - Clear Grid
+  const clear = (e) => {
+    e.preventDefault()
+    setGrid(clearGrid(empty2Dgrid(size), size))
   }
 
   // - 3 - Toggle Cell State
@@ -87,38 +87,11 @@ function App() {
     }
 
     // - B - SIMULATION LOGIC ***
-    runIteration()
+    runIteration(size, setGrid)
 
     // - C - SetTimeout
     setTimeout(runSimulation, simSpeed)  
   }, [size])
-
-  // - 6 - Iteration
-  const runIteration = () => {
-    setGrid(g => {
-      return produce(g, gridCopy => {
-        // console.log(size)
-
-        // - A - Main Loop
-        for (let i = 0; i < size; i++) {
-          for (let k = 0; k < size; k++) {
-            // - B - Count Neighbors
-            let neighbors = countNeighbors(g, i, k, size)
-            if (neighbors > 0) {
-              // console.log(`runIteration => cell [${i},${k}] has ${neighbors} neighbors`)
-            }
-
-            // - C - Core Game Cell Update Logic
-            if (neighbors < 2 || neighbors > 3) {
-              gridCopy[i][k] = 0
-            } else if (g[i][k] === 0 && neighbors === 3) {
-              gridCopy[i][k] = 1
-            }
-          }
-        }
-      })
-    })
-  }
 
   return (
     <div className="App">

@@ -42,8 +42,8 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
 ## Steps
 1. Build empty Grid 
 2. Set Initial State  
-    A - Random => Loop through all cells and randomly fill with `0` or `1`    
-    B - User Created => starting with all `0's` a user can click to change a cell state before starting the simulation 
+    `A` - Random => Loop through all cells and randomly fill with `0` or `1`    
+    `B` - User Created => starting with all `0's` a user can click to change a cell state before starting the simulation 
 3. Render Initial State (Generation: 0)
 4. Run Simulation  
     `A` - Update application `running` state  

@@ -8,9 +8,9 @@ import produce from 'immer'
 
 // FUNCTIONS
 import { empty2Dgrid } from './utils/empty2Dgrid.js'
-import { randomGrid } from './utils/randomGrid.js'
 import { clearGrid } from './utils/clearGrid.js'
 import runIteration from './utils/runIteration.js'
+import randomize from './utils/randomize.js'
 
 // COMPONENTS
 import AppStateForm from './components/AppStateForm.js'
@@ -33,27 +33,17 @@ function App() {
 
   // USE EFFECT
   useEffect(() => {
-    console.log('<App /> UseEffect Triggered')
-
-    randomize()
+    randomize(size, setGrid)
   }, [size])
 
   // METHODS
-  // - 1 - Randomize Grid
-  const randomize = (e) => {
-    if (e) { // Allows successful call of randomize() from useEffect onload
-      e.preventDefault()
-    }
-    setGrid(randomGrid(empty2Dgrid(size), size))
-  }
-
-  // - 2 - Clear Grid
+  // - 1 - Clear Grid
   const clear = (e) => {
     e.preventDefault()
     setGrid(clearGrid(empty2Dgrid(size), size))
   }
 
-  // - 3 - Toggle Cell State
+  // - 2 - Toggle Cell State
   const toggleCellStatus = (i,k) => {
     // Immutable State Update => immer 
     const newGrid = produce(grid, gridCopy => {

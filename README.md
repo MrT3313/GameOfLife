@@ -32,7 +32,7 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
     ```javascript
         grid [2] [3]
               ^   ^
-             col  row 
+             row col 
     ```
 3. Cell State
 
@@ -42,9 +42,8 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
 ## Steps
 1. Build empty Grid 
 2. Set Initial State  
-    A - Random => Loop through all cells and randomly fill with `0` or `1`  
-    B - Pre Defined => Developer created or community built initial configurations    
-    C - User Created => starting with all `0's` a user can click to change a cell state before starting the simulation 
+    A - Random => Loop through all cells and randomly fill with `0` or `1`    
+    B - User Created => starting with all `0's` a user can click to change a cell state before starting the simulation 
 3. Render Initial State (Generation: 0)
 4. Run Simulation  
     `A` - Update application `running` state  
@@ -53,7 +52,7 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
     `D` - Update individual cells based on game rules regarding number of neighbors     
     `E` - Immutably update `<App />` state grid  
     `F` - Utilize a timeout to space out simulation iterations  
-    `G` - Loop back to A 
+    `G` - Loop back to `B` 
 
 # Versions
 <details>

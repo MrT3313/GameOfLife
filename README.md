@@ -57,13 +57,17 @@ John Conway on inventing the Game of Life: [YouTube Video](https://www.youtube.c
 
 # Versions
 <details>
+<summary>1.1.0 - Favicon Update</summary>
+</details>
+
+<details>
 <summary>1.0.0 - Live Hosting</summary>
 
 [Live Project Link](https://turgeon-gameoflife.netlify.app)
 
 </details>
 
-<details open>
+<details>
 <summary>0.6.0 - Responsive Design: Desktop First</summary>
 
 - `Desktop First` uses a `max-width` approach to media breakpoints

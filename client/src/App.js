@@ -109,6 +109,7 @@ function App() {
           })}
         </div>
         <AppStateForm 
+          setGrid={setGrid}
           randomize={randomize}
           clear={clear}
           currentSize={size}

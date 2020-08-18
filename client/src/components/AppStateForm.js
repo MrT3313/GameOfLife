@@ -7,6 +7,7 @@ import '../styles/appStateForm.css'
 // MAIN
 function AppStateForm(props) {
     const { 
+        setGrid,
         randomize, clear,
         currentSize, setSize,
         isRunning,
@@ -20,6 +21,10 @@ function AppStateForm(props) {
     const submitHelper = e => {
         e.preventDefault()
         setSize(newSize)
+    }
+    const randomizeHelper = e => {
+        e.preventDefault()
+        randomize(currentSize, setGrid)
     }
 
     return (
@@ -42,7 +47,7 @@ function AppStateForm(props) {
                     <button onClick={e => clear(e)}>
                         Clear Grid
                     </button>
-                    <button onClick={e => randomize(e)}>
+                    <button onClick={e => randomizeHelper(e)}>
                         Randomize Grid
                     </button>
                 </form>
